@@ -6,7 +6,7 @@ from prepare_the_reference import prepare_ref
 __author__ = "Sihao Huang"
 __copyright__ = ""
 __credits__ = []
-__license__ = "MIT"
+__license__ = "GPL 2.0"
 __version__ = "0.1"
 __maintainer__ = "Sihao Huang"
 __email__ = "sihaohuang1024@gmail.com"
