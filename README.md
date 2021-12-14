@@ -1,5 +1,5 @@
 # Description
-## 20211203 version (new)
+## 20211213 version (new)
 Recently I find that my colleagues and friends have many small demands to check something in the genome. These demands are not difficult to satisfy by several lines of codes, but may be obstacles for those who seldom write codes. Therefore I decide to store my codes for all kinds of interesting or boring small functions here. The name "Genome_counter" will be kept, as that's the first function in this package and I don't want to set a limitation of what the future functions could do.
 ## 20211203 version (old)
 This repository is a small tool to count the frequency of a specific fragment in a genome. At the same time, this repository explains what `if __name__=="__main__":` is doing. This time I didn't make the codes into a installable package as the functions of the codes are very simple.
