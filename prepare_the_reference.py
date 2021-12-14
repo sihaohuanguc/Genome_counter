@@ -2,6 +2,15 @@ import os
 import pickle
 import argparse
 
+__author__ = "Sihao Huang"
+__copyright__ = ""
+__credits__ = []
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Sihao Huang"
+__email__ = "sihaohuang1024@gmail.com"
+__status__ = "Development"
+
 def prepare_ref(in_ref):
     with open(in_ref,"r") as f:
         all_ref={}
