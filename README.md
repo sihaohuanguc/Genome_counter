@@ -16,7 +16,7 @@ Replace `reference.fa` with the name of your reference, which is supposed to be 
 ## 1.2 If you will search for many fragments in the same genome
 In this case, a prepared genome file is supposed to be made in advance so that you don't need to make it every time you run the searching. Run the following command
 ```bash
-python prepare_the_reference.py -r reference.fa -o out_put
+python prepare_the_reference.py -r reference.fa -o out_put.pkl
 ```
 Replace `reference.fa` with the name of your reference, which is supposed to be in the same folder as the script. Replace `out_put` with the name of the output file you want. A suffix is not needed for this file and it will be added automatically. This parameter is optional. It will take seconds to minutes to run depending on the size of the genome.
 
@@ -24,14 +24,42 @@ After the genome file is prepared. Run the following command
 ```bash
 python count_the_fragment.py -p out_put.pkl -f ACGTACGT
 ```
-Replace `out_put.pkl` with the name of the prepared genome file. Replace `ACGTACGT` with the fragment you want to search.
+Replace `out_put.pkl` with the name of the prepared genome file. Replace `ACGTACGT` with the fragment you want to search. If you need more information, please run
+```bash
+python prepare_the_reference.py -h
+```
+and
+```bash
+python count_the_fragment.py -h
+```
+for help.
 
 # 2. Sequence printer
 This is a small tool to print the sequence in the genome, based on the range you provide. It could be used to print the flanking sequences of a gene, which may not be provided in the information of that gene. There are also two modes with/without a pre-treated genome reference file and they work exactly the same way as above. Therefore here we only show how to check the content of the sequence with a prepared reference file. Run the following command
 ```bash
 python get_the_sequence.py -p out_put.pkl -g chr1:+:12345678:12345688 
 ```
-Replace `out_put.pkl` with the name of the prepared genome file. Replace `chr1:+:12345678:12345688` with the region you are interested in. The argument contain the name of the chromosome, the strand, the starting base and the ending base separated by a colon.
+Replace `out_put.pkl` with the name of the prepared genome file. Replace `chr1:+:12345678:12345688` with the region you are interested in. The argument contain the name of the chromosome, the strand, the starting base and the ending base separated by a colon. If you need more information, please run
+```bash
+python get_the_sequence.py -h
+```
+for help.
+
+# 3. Find enriched fragments in specific RNA
+This is a small tool to discover enriched motifs in one type of RNA and check their frequency in another type of RNA. It could be used to search for primers to enrich a specific type of RNA. You need two files containing the RNA strands that you want to enrich and the potential contamination RNA strands. First you need to pre-treat the reference files.
+```bash
+python prepare_the_reference.py -r RNA1.fa -o RNA1.pkl
+python prepare_the_reference.py -r RNA2.fa -o RNA2.pkl
+```
+`RNA1.fa` and `RNA2.fa` are the two input files with RNA strands. `RNA1.pkl` and `RNA2.pkl` are the prepared RNA reference files. Then run
+```bash
+python compare_RNA_motif_freq.py -p1 RNA1.pkl -p2 RNA2.pkl -sl N -ofn x.png
+```
+`RNA1.pkl` is the file with the strands that you would like to enrich. `RNA2.pkl` is the file with the strands you don't want. The position of the two RNA files should not be exchanged. `N` is the length of fragment you want to search for. `x.png` is the name of the output figure. If you need more information, please run
+```bash
+python compare_RNA_motif_freq.py -h
+```
+for help.
 
 # Explanation (nothing biology below)
 When you run the `count_the_fragment.py` without a prepared genome file, the program will import the function `prepare_ref` from `prepare_the_reference.py`. In this case, the content after `if __name__=="__main__":` in `prepare_the_reference.py` will not run, as `__name__` will be the name of the file `prepare_the_reference` at that time. It only serves as a function provider. However, you may also run `prepare_the_reference.py` by itself directly. In this case the content after `if __name__=="__main__":` will run.
